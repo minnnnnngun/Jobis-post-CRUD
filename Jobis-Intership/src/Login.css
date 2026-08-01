@@ -1,0 +1,99 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+.Form-center {
+  position: relative;
+  top: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.Center-text {
+  text-align: center;
+}
+
+.LoginPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+}
+
+.LoginForm {
+  width: 400px;
+  padding: 32px;
+
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgb(0 0 0 / 12%);
+}
+
+.LoginForm-input {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+}
+
+.InputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.InputGroup label {
+  color: #4b5563;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.InputGroup input {
+  width: 100%;
+  height: 44px;
+  padding: 0 12px;
+
+  color: #374151;
+  font-size: 14px;
+  background-color: #ffffff;
+
+  border: 1px solid #d1d5db;
+  border-radius: 5px;
+  outline: none;
+}
+
+.InputGroup input::placeholder {
+  color: #9ca3af;
+}
+
+.InputGroup input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgb(37 99 235 / 12%);
+}
+
+.LoginForm-input button {
+  width: 100%;
+  height: 44px;
+
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #2563eb;
+
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.LoginError {
+  margin: 0;
+  color: #dc2626;
+  font-size: 13px;
+}
