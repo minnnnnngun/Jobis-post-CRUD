@@ -2,7 +2,10 @@ import { useState, type FormEvent } from "react";
 import { login } from "../api/api";
 import "../Login.css";
 
-function Login() {
+interface LoginFormProps {
+  onLogin: (token: string) => void;
+}
+function Login({ onLogin }: LoginFormProps) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -23,7 +26,7 @@ function Login() {
 
       const loginData = await login(username, password);
 
-      console.log(loginData);
+      onLogin(loginData.token);
     } catch {
       setError("아이디 또는 비밀번호를 확인해주세요.");
       setPassword("");
