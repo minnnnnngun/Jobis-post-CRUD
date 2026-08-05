@@ -8,10 +8,33 @@ export interface LoginResponse {
   token: string;
 }
 
+export interface Author {
+  id: number;
+  username: string;
+  role: string;
+}
+
+export interface Post {
+  id: number;
+  title: string;
+  content: string;
+  author: Author;
+}
+
 export async function login(username: string, password: string) {
   const response = await api.post<LoginResponse>("/login", {
     username,
     password,
+  });
+
+  return response.data;
+}
+
+export async function getPosts(token: string) {
+  const response = await api.get<Post[]>("/posts", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
 
   return response.data;
