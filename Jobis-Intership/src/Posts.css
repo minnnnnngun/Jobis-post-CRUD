@@ -47,16 +47,6 @@
   font-size: 14px;
 }
 
-.post-footer {
-  color: #000000;
-  font-size: 13px;
-  text-align: right;
-}
-
-.post-footer p {
-  margin: 4px 0;
-}
-
 .posts-empty {
   padding: 60px 20px;
   color: #777;

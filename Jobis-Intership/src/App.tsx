@@ -9,7 +9,10 @@ function App() {
   const navigate = useNavigate();
 
   // 로그인 성공 시 JWT 토큰 저장
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(() => {
+    // 새로고침 후에도 저장된 토큰 불러오기
+    return localStorage.getItem("token") ?? "";
+  });
   const [posts, setPosts] = useState<Post[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -17,14 +20,16 @@ function App() {
   const handleLogout = () => {
     // 토큰을 초기화하면 로그인 화면으로 돌아감
     setToken("");
+    localStorage.removeItem("token");
     setPosts([]);
     setError(null);
-    navigate("/login", { replace: true });
+    navigate("/login");
   };
 
   const handleLogin = (loginToken: string) => {
     setToken(loginToken);
-    navigate("/posts", { replace: true });
+    localStorage.setItem("token", loginToken);
+    navigate("/posts");
   };
 
   useEffect(() => {
@@ -72,23 +77,16 @@ function App() {
       <Route
         path="/login"
         element={
-          token ? (
-            <Navigate to="/posts" replace />
-          ) : (
-            <LoginForm onLogin={handleLogin} />
-          )
+          token ? <Navigate to="/posts" /> : <LoginForm onLogin={handleLogin} />
         }
       />
 
       <Route
         path="/posts"
-        element={token ? postsPage : <Navigate to="/login" replace />}
+        element={token ? postsPage : <Navigate to="/login" />}
       />
 
-      <Route
-        path="*"
-        element={<Navigate to={token ? "/posts" : "/login"} replace />}
-      />
+      <Route path="*" element={<Navigate to={token ? "/posts" : "/login"} />} />
     </Routes>
   );
 }

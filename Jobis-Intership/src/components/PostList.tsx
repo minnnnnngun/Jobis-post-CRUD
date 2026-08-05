@@ -27,11 +27,6 @@ function PostList({ posts }: PostListProps) {
             <h3 className="post-title"> {post.title} </h3>
 
             <p className="post-content"> {post.content} </p>
-
-            <footer className="post-footer">
-              <p> 작성자: {post.author.username}</p>
-              <p> 권한: {post.author.role}</p>
-            </footer>
           </article>
         ))}
       </div>
