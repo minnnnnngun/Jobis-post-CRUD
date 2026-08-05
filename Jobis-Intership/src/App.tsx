@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { getPosts, type Post } from "./api/api";
 import LoginForm from "./components/LoginForm";
 import PostList from "./components/PostList";
 import "./App.css";
 
 function App() {
+  const navigate = useNavigate();
+
   // 로그인 성공 시 JWT 토큰 저장
   const [token, setToken] = useState("");
   const [posts, setPosts] = useState<Post[]>([]);
@@ -16,6 +19,12 @@ function App() {
     setToken("");
     setPosts([]);
     setError(null);
+    navigate("/login", { replace: true });
+  };
+
+  const handleLogin = (loginToken: string) => {
+    setToken(loginToken);
+    navigate("/posts", { replace: true });
   };
 
   useEffect(() => {
@@ -40,21 +49,12 @@ function App() {
     loadPosts();
   }, [token]);
 
-  // 토큰이 없으면 로그인 화면 표시
-  if (!token) {
-    return <LoginForm onLogin={setToken} />;
-  }
-  // 토큰이 있으면 로그인 이후 화면 표시
-  return (
+  const postsPage = (
     <main>
       <header className="board-header">
         <h1>게시판</h1>
 
-        <button
-          className="logout-button"
-          type="button"
-          onClick={handleLogout}
-        >
+        <button className="logout-button" type="button" onClick={handleLogout}>
           로그아웃
         </button>
       </header>
@@ -65,6 +65,31 @@ function App() {
 
       {!isLoading && !error && <PostList posts={posts} />}
     </main>
+  );
+
+  return (
+    <Routes>
+      <Route
+        path="/login"
+        element={
+          token ? (
+            <Navigate to="/posts" replace />
+          ) : (
+            <LoginForm onLogin={handleLogin} />
+          )
+        }
+      />
+
+      <Route
+        path="/posts"
+        element={token ? postsPage : <Navigate to="/login" replace />}
+      />
+
+      <Route
+        path="*"
+        element={<Navigate to={token ? "/posts" : "/login"} replace />}
+      />
+    </Routes>
   );
 }
 
