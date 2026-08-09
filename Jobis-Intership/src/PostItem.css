@@ -1,0 +1,179 @@
+.post-row {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(120px, 1fr) 80px 140px;
+  align-items: center;
+  min-height: 58px;
+  padding: 0 22px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  border-top: 1px solid #e5e7eb;
+}
+
+.post-id {
+  color: #6b7280;
+  font-size: 14px;
+  text-align: center;
+}
+
+.post-title-button {
+  display: block;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #111827;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.post-title-button:hover {
+  color: #3b82f6;
+}
+
+.post-author {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.post-view-button {
+  justify-self: center;
+  padding: 6px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: #4b5563;
+  cursor: pointer;
+}
+
+.post-view-button:hover {
+  border-color: #3b82f6;
+  color: #2563eb;
+}
+
+.post-actions {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.post-delete-button,
+.post-modal-delete {
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: #dc2626;
+  cursor: pointer;
+}
+
+.post-delete-button {
+  padding: 6px 10px;
+}
+
+.post-delete-button:hover,
+.post-modal-delete:hover {
+  background-color: #fef2f2;
+}
+
+.post-delete-button:disabled,
+.post-modal-delete:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* 브라우저 기본 dialog 영역 */
+.post-dialog {
+  width: min(950px, calc(100% - 48px));
+  max-width: none;
+  max-height: 90vh;
+  padding: 0;
+  border: none;
+  background: transparent;
+  overflow: visible;
+}
+
+.post-dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* dialog 내부 상세 게시글 */
+.post-modal {
+  position: relative;
+  width: 100%;
+  min-height: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 50px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  border-radius: 4px;
+}
+
+.post-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  padding: 4px 10px;
+  border: none;
+  background: none;
+  color: #6b7280;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.post-modal-close:hover {
+  color: #111827;
+}
+
+.post-modal-title {
+  margin: 0 0 16px;
+  color: #111827;
+  font-size: 32px;
+}
+
+.post-modal-author {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.post-modal-content {
+  margin: 0;
+  color: #374151;
+  font-size: 17px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.post-modal-delete {
+  margin-top: 40px;
+  padding: 10px 14px;
+}
+
+@media (max-width: 640px) {
+  .post-row {
+    grid-template-columns: minmax(0, 1fr) 100px 60px;
+    padding: 0 14px;
+  }
+
+  .post-id {
+    display: none;
+  }
+
+  .post-author {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .post-dialog {
+    width: calc(100% - 32px);
+  }
+
+  .post-modal {
+    min-height: 500px;
+    padding: 42px 24px;
+  }
+}

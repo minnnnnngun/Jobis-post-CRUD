@@ -1,15 +1,24 @@
 import type { Post } from "../api/api";
+import PostItem from "./PostItem";
+import PostForm from "./PostForm";
 import "../Posts.css";
 
 interface PostListProps {
   posts: Post[];
+  token: string;
+  isAdmin: boolean;
+  onCreated: (post: Post) => void;
+  onDelete: (postId: number) => Promise<void>;
 }
 
-function PostList({ posts }: PostListProps) {
+function PostList({ posts, token, isAdmin, onCreated, onDelete }: PostListProps) {
   if (posts.length === 0) {
     return (
       <section className="posts-section">
-        <h2 className="posts-title"> 전체 게시글 </h2>
+        <div className="posts-heading">
+          <h2 className="posts-title">전체 게시글</h2>
+          <PostForm token={token} onCreated={onCreated} />
+        </div>
         <p className="posts-empty"> 아직 작성된 게시글이 없습니다.</p>
       </section>
     );
@@ -17,18 +26,29 @@ function PostList({ posts }: PostListProps) {
 
   return (
     <section className="posts-section">
-      <h2 className="posts-title"> 전체 게시글 </h2>
+      <div className="posts-heading">
+        <h2 className="posts-title">전체 게시글</h2>
+        <PostForm token={token} onCreated={onCreated} />
+      </div>
 
-      <div className="posts-grid">
-        {posts.map((post) => (
-          <article className="post-card" key={post.id}>
-            <p className="post-id"> 게시글 ID: {post.id} </p>
+      <div className="posts-table">
+        <div className="posts-table-header" aria-hidden="true">
+          <span>제목</span>
+          <span>작성자</span>
+          <span>번호</span>
+          <span>관리</span>
+        </div>
 
-            <h3 className="post-title"> {post.title} </h3>
-
-            <p className="post-content"> {post.content} </p>
-          </article>
-        ))}
+        <div className="posts-list">
+          {posts.map((post) => (
+            <PostItem
+              key={post.id}
+              post={post}
+              isAdmin={isAdmin}
+              onDelete={onDelete}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

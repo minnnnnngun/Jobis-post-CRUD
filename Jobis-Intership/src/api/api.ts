@@ -6,6 +6,7 @@ const api = axios.create({
 
 export interface LoginResponse {
   token: string;
+  user: Author;
 }
 
 export interface Author {
@@ -38,6 +39,32 @@ export async function getPosts(token: string) {
   });
 
   return response.data;
+}
+
+export async function createPost(
+  token: string,
+  title: string,
+  content: string,
+) {
+  const response = await api.post<Post>(
+    "/posts",
+    { title, content },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
+  return response.data;
+}
+
+export async function deletePost(token: string, postId: number) {
+  await api.delete(`/posts/${postId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 }
 
 export default api;

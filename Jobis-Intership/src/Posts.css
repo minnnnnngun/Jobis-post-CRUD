@@ -1,57 +1,80 @@
+/* 게시글 목록 전체 영역 */
 .posts-section {
-  width: 900px;
-  max-width: 90%;
-  margin: 50px auto;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  box-sizing: border-box;
 }
 
+/* 게시글 목록 제목 */
 .posts-title {
-  margin-bottom: 25px;
-  color: #222;
-  font-size: 28px;
+  margin: 0;
+  color: #111827;
+  font-size: 30px;
+  font-weight: 700;
 }
 
-.posts-grid {
-  overflow: hidden;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-}
-
-.post-card {
-  display: grid;
-  grid-template-columns: 110px 1fr 180px;
-  padding: 20px;
+.posts-heading {
+  display: flex;
   align-items: center;
-  border-bottom: 1px solid #ddd;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
 }
 
-.post-card:last-child {
-  border-bottom: none;
+/* 게시글 표 */
+.posts-table {
+  overflow: hidden;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
 }
 
-.post-id {
-  margin: 0;
-  color: #777;
-  font-size: 13px;
-}
-
-.post-title {
-  margin: 0 0 8px;
-  color: #222;
-  font-size: 16px;
-}
-
-.post-content {
-  margin: 0;
-  color: #666;
+.posts-table-header {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(120px, 1fr) 80px 140px;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 22px;
+  box-sizing: border-box;
+  background-color: #f8f9fb;
+  color: #6b7280;
   font-size: 14px;
+  font-weight: 600;
 }
 
-.posts-empty {
-  padding: 60px 20px;
-  color: #777;
+.posts-table-header span:nth-child(3),
+.posts-table-header span:nth-child(4) {
   text-align: center;
-  background-color: white;
-  border: 1px solid #ddd;
+}
+
+.posts-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 게시글이 없을 때 표시할 문구 */
+.posts-empty {
+  padding: 50px 20px;
+  margin: 0;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
   border-radius: 10px;
+  color: #6b7280;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .posts-section {
+    padding: 28px 16px;
+  }
+
+  .posts-table-header {
+    grid-template-columns: minmax(0, 1fr) 100px 60px;
+  }
+
+  .posts-table-header span:nth-child(3) {
+    display: none;
+  }
 }
