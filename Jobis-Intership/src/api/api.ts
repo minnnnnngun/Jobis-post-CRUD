@@ -59,6 +59,25 @@ export async function createPost(
   return response.data;
 }
 
+export async function updatePost(
+  token: string,
+  postId: number,
+  title: string,
+  content: string,
+) {
+  const response = await api.put<Post>(
+    `/posts/${postId}`,
+    { title, content },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
+  return response.data;
+}
+
 export async function deletePost(token: string, postId: number) {
   await api.delete(`/posts/${postId}`, {
     headers: {

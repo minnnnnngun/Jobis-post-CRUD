@@ -7,11 +7,25 @@ interface PostListProps {
   posts: Post[];
   token: string;
   isAdmin: boolean;
+  currentUserId: number | null;
   onCreated: (post: Post) => void;
   onDelete: (postId: number) => Promise<void>;
+  onUpdated: (
+    postId: number,
+    title: string,
+    content: string,
+  ) => Promise<Post>;
 }
 
-function PostList({ posts, token, isAdmin, onCreated, onDelete }: PostListProps) {
+function PostList({
+  posts,
+  token,
+  isAdmin,
+  currentUserId,
+  onCreated,
+  onDelete,
+  onUpdated,
+}: PostListProps) {
   if (posts.length === 0) {
     return (
       <section className="posts-section">
@@ -45,7 +59,9 @@ function PostList({ posts, token, isAdmin, onCreated, onDelete }: PostListProps)
               key={post.id}
               post={post}
               isAdmin={isAdmin}
+              currentUserId={currentUserId}
               onDelete={onDelete}
+              onUpdated={onUpdated}
             />
           ))}
         </div>

@@ -147,9 +147,100 @@
   white-space: pre-wrap;
 }
 
-.post-modal-delete {
+.post-modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   margin-top: 40px;
+}
+
+.post-modal-edit,
+.post-modal-delete {
   padding: 10px 14px;
+}
+
+.post-modal-edit {
+  border: 1px solid #bfdbfe;
+  border-radius: 6px;
+  background-color: #eff6ff;
+  color: #2563eb;
+  cursor: pointer;
+}
+
+.post-modal-edit:hover {
+  background-color: #dbeafe;
+}
+
+.post-modal-actions .post-modal-delete {
+  margin-top: 0;
+}
+
+.post-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.post-edit-form label {
+  color: #374151;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.post-edit-form input,
+.post-edit-form textarea {
+  width: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  font: inherit;
+}
+
+.post-edit-form textarea {
+  resize: vertical;
+}
+
+.post-edit-error {
+  margin: 4px 0;
+  color: #dc2626;
+  font-size: 14px;
+}
+
+.post-edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.post-edit-cancel,
+.post-edit-submit {
+  padding: 10px 14px;
+  border-radius: 7px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.post-edit-cancel {
+  border: 1px solid #d1d5db;
+  background-color: #ffffff;
+  color: #4b5563;
+}
+
+.post-edit-submit {
+  border: none;
+  background-color: #3b82f6;
+  color: #ffffff;
+}
+
+.post-edit-submit:hover {
+  background-color: #2563eb;
+}
+
+.post-edit-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 @media (max-width: 640px) {

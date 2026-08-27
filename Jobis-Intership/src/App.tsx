@@ -4,6 +4,7 @@ import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import {
   deletePost,
   getPosts,
+  updatePost,
   type Author,
   type Post,
 } from "./api/api";
@@ -70,6 +71,24 @@ function App() {
     }
   };
 
+  const handleUpdated = async (
+    postId: number,
+    title: string,
+    content: string,
+  ) => {
+    try {
+      setError(null);
+      const updatedPost = await updatePost(token, postId, title, content);
+      setPosts((currentPosts) =>
+        currentPosts.map((post) => (post.id === postId ? updatedPost : post)),
+      );
+      return updatedPost;
+    } catch (requestError) {
+      setError("게시글을 수정하지 못했습니다.");
+      throw requestError;
+    }
+  };
+
   useEffect(() => {
     if (!token) {
       return;
@@ -126,8 +145,10 @@ function App() {
           posts={posts}
           token={token}
           isAdmin={user?.role === "admin"}
+          currentUserId={user?.id ?? null}
           onCreated={handleCreated}
           onDelete={handleDelete}
+          onUpdated={handleUpdated}
         />
       )}
     </main>
