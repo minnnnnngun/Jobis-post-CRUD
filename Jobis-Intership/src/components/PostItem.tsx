@@ -49,6 +49,11 @@ function PostItem({
     setEditError(null);
   };
 
+  const openEditDialog = () => {
+    startEditing();
+    dialogRef.current?.showModal();
+  };
+
   const handleUpdate = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -135,6 +140,16 @@ function PostItem({
           <button type="button" className="post-view-button" onClick={openDialog}>
             보기
           </button>
+
+          {canEdit && (
+            <button
+              type="button"
+              className="post-edit-button"
+              onClick={openEditDialog}
+            >
+              수정
+            </button>
+          )}
 
           {isAdmin && (
             <button
